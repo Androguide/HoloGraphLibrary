@@ -23,28 +23,17 @@
 
 package com.echo.holographlibrarysample;
 
-import java.util.ArrayList;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.echo.holographlibrary.BarGraph;
-import com.echo.holographlibrary.Bar;
-import com.echo.holographlibrary.Line;
-import com.echo.holographlibrary.LinePoint;
-import com.echo.holographlibrary.LineGraph;
-import com.echo.holographlibrary.PieGraph;
-import com.echo.holographlibrary.PieSlice;
-
 import android.os.Bundle;
-import android.app.Activity;
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.Tab;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+
+import java.util.ArrayList;
 
 public class MainActivity extends SherlockFragmentActivity {
 
