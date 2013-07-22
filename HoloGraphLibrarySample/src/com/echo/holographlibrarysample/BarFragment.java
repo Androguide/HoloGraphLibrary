@@ -23,8 +23,6 @@
 
 package com.echo.holographlibrarysample;
 
-import java.util.ArrayList;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,6 +33,8 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
 import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
+
+import java.util.ArrayList;
 
 public class BarFragment extends SherlockFragment {
 	
@@ -54,6 +54,7 @@ public class BarFragment extends SherlockFragment {
 		points.add(d2);
 		
 		BarGraph g = (BarGraph)v.findViewById(R.id.bargraph);
+        g.setUnit("€");
 		g.setBars(points);
 		
 		g.setOnBarClickedListener(new OnBarClickedListener(){
