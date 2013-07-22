@@ -41,6 +41,8 @@ public class BarFragment extends SherlockFragment {
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View v = inflater.inflate(R.layout.fragment_bargraph, container, false);
+        assert v != null;
+
 		ArrayList<Bar> points = new ArrayList<Bar>();
 		Bar d = new Bar();
 		d.setColor(Color.parseColor("#99CC00"));
@@ -52,9 +54,11 @@ public class BarFragment extends SherlockFragment {
 		d2.setValue(20);
 		points.add(d);
 		points.add(d2);
-		
-		BarGraph g = (BarGraph)v.findViewById(R.id.bargraph);
+
+        BarGraph g = (BarGraph)v.findViewById(R.id.bargraph);
+        assert g != null;
         g.setUnit("€");
+        g.appendUnit(true);
 		g.setBars(points);
 		
 		g.setOnBarClickedListener(new OnBarClickedListener(){

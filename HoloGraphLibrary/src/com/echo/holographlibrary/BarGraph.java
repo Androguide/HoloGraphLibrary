@@ -55,6 +55,7 @@ public class BarGraph extends View {
     private Bitmap fullImage;
     private boolean shouldUpdate = false;
     private String unit = "$";
+    private Boolean append = false;
     private Rect r2 = new Rect();
     private Rect r3 = new Rect();
 
@@ -75,9 +76,20 @@ public class BarGraph extends View {
         postInvalidate();
     }
 
-    public String setUnit(String unit) {
+    public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public String getUnit() {
         return this.unit;
+    }
+
+    public void appendUnit(Boolean doAppend) {
+        this.append = doAppend;
+    }
+
+    public Boolean isAppended() {
+        return this.append;
     }
 
     public ArrayList<Bar> getBars() {
@@ -144,7 +156,10 @@ public class BarGraph extends View {
                     if (popup != null)
                         popup.setBounds((int) (((r.left + r.right) / 2) - (this.p.measureText(unit + p.getValue()) / 2)) - 14, r.top + (r2.top - r2.bottom) - 26, (int) (((r.left + r.right) / 2) + (this.p.measureText(unit + p.getValue()) / 2)) + 14, r.top);
                     popup.draw(canvas);
-                    canvas.drawText(unit + p.getValue(), (int) (((r.left + r.right) / 2) - (this.p.measureText(unit + p.getValue()) / 2)), r.top - 20, this.p);
+                    if (isAppended())
+                        canvas.drawText(p.getValue() + unit, (int) (((r.left + r.right) / 2) - (this.p.measureText(unit + p.getValue()) / 2)), r.top - 20, this.p);
+                    else
+                        canvas.drawText(unit + p.getValue(), (int) (((r.left + r.right) / 2) - (this.p.measureText(unit + p.getValue()) / 2)), r.top - 20, this.p);
                 }
                 if (indexSelected == count && listener != null) {
                     this.p.setColor(Color.parseColor("#33B5E5"));
