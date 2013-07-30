@@ -50,7 +50,8 @@ import android.view.View;
 public class LineGraph extends View {
 	
 	private ArrayList<Line> lines = new ArrayList<Line>();
-	Paint paint = new Paint();
+	private Paint paint = new Paint();
+	private Paint txtPaint = new Paint();
 	private float minY = 0, minX = 0;
 	private float maxY = 0, maxX = 0;
 	private boolean isMaxYUserSet = false;
@@ -59,18 +60,48 @@ public class LineGraph extends View {
 	private OnPointClickedListener listener;
 	private Bitmap fullImage;
 	private boolean shouldUpdate = false;
+	private boolean showMinandMax = false;
+	private boolean showHorizontalGrid = false;
+	private int gridColor = 0xffffffff;
 	
 	public LineGraph(Context context){
-		super(context);
+		this(context,null);
 	}
-	
 	public LineGraph(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		txtPaint.setColor(0xffffffff);
+		txtPaint.setTextSize(20);
+		txtPaint.setAntiAlias(true);
+	}
+	public void setGridColor(int color)
+	{
+		gridColor = color;
+	}
+	public void showHorizontalGrid(boolean show)
+	{
+		showHorizontalGrid = show;
+	}
+	public void showMinAndMaxValues(boolean show)
+	{
+		showMinandMax = show;
+	}
+	public void setTextColor(int color)
+	{
+		txtPaint.setColor(color);
+	}
+	public void setTextSize(float s)
+	{
+		txtPaint.setTextSize(s);
 	}
 	public void setMinY(float minY){
-		
+		this.minY = minY;
 	}
 	
+	public void update()
+	{
+		shouldUpdate = true;
+		postInvalidate();
+	}
 	public void removeAllLines(){
 		while (lines.size() > 0){
 			lines.remove(0);
@@ -166,14 +197,19 @@ public class LineGraph extends View {
 		if (fullImage == null || shouldUpdate) {
 			fullImage = Bitmap.createBitmap(getWidth(), getHeight(), Config.ARGB_8888);
 			Canvas canvas = new Canvas(fullImage);
-			
+			String max = (int)maxY+"";// used to display max
+			String min = (int)minY+"";// used to display min
 			paint.reset();
 			Path path = new Path();
 			
-			float bottomPadding = 10, topPadding = 10;
+			float bottomPadding = 1, topPadding = 0;
 			float sidePadding = 10;
+			if(this.showMinandMax)
+				sidePadding = txtPaint.measureText(max);
+			
 			float usableHeight = getHeight() - bottomPadding - topPadding;
-			float usableWidth = getWidth() - 2*sidePadding;
+			float usableWidth = getWidth() - sidePadding;
+			float lineSpace = usableHeight/10;
 			
 			int lineCount = 0;
 			for (Line line : lines){
@@ -247,10 +283,15 @@ public class LineGraph extends View {
 			
 			paint.reset();
 			
-			paint.setColor(Color.BLACK);
+			paint.setColor(this.gridColor);
 			paint.setAlpha(50);
 			paint.setAntiAlias(true);
-			canvas.drawLine(sidePadding, getHeight() - bottomPadding, getWidth()-sidePadding, getHeight()-bottomPadding, paint);
+			canvas.drawLine(sidePadding, getHeight() - bottomPadding, getWidth(), getHeight()-bottomPadding, paint);
+			if(this.showHorizontalGrid)
+				for(int i=1;i<=10;i++)
+				{
+					canvas.drawLine(sidePadding, getHeight() - bottomPadding-(i*lineSpace), getWidth(), getHeight()-bottomPadding-(i*lineSpace), paint);
+				}
 			paint.setAlpha(255);
 			
 			
@@ -326,6 +367,11 @@ public class LineGraph extends View {
 			}
 			
 			shouldUpdate = false;
+			if(this.showMinandMax)
+			{
+				ca.drawText(max, 0, txtPaint.getTextSize(), txtPaint);
+				ca.drawText(min,0,this.getHeight(),txtPaint);
+			}
 		}
 		
 		ca.drawBitmap(fullImage, 0, 0, null);
