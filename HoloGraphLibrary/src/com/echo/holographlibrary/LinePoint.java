@@ -2,6 +2,7 @@
  * 	   Created by Daniel Nadeau
  * 	   daniel.nadeau01@gmail.com
  * 	   danielnadeau.blogspot.com
+ *
  * 
  * 	   Licensed to the Apache Software Foundation (ASF) under one
        or more contributor license agreements.  See the NOTICE file
@@ -37,31 +38,39 @@ public class LinePoint {
 		this.x = x;
 		this.y = y;
 	}
+
+    public LinePoint() { }
+
 	public float getX() {
 		return x;
 	}
+
 	public void setX(float x) {
 		this.x = x;
 	}
+
 	public float getY() {
 		return y;
 	}
+
 	public void setY(float y) {
 		this.y = y;
 	}
+
 	public Region getRegion() {
 		return region;
 	}
+
 	public void setRegion(Region region) {
 		this.region = region;
 	}
+
 	public Path getPath() {
 		return path;
 	}
+
 	public void setPath(Path path) {
 		this.path = path;
 	}
-	
-	
-	
+
 }
