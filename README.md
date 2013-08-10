@@ -18,8 +18,7 @@ This is a library written to allow beautiful graphs and charts to be easily inco
 
 #LineGraph View
 
-```
-#!xml
+```xml
 
 <com.echo.holographlibrary.LineGraph
         android:layout_width="match_parent"
@@ -27,8 +26,7 @@ This is a library written to allow beautiful graphs and charts to be easily inco
         android:id="@+id/graph"/>
 ```
 
-```
-#!java
+```java
 
 Line l = new Line();
 LinePoint p = new LinePoint();
