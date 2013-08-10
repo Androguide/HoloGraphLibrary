@@ -53,8 +53,7 @@ li.setLineToFill(0);
 
 #BarGraph View
 
-```
-#!xml
+```xml
 
 <com.echo.holographlibrary.BarGraph
         android:layout_width="match_parent"
@@ -62,8 +61,7 @@ li.setLineToFill(0);
         android:id="@+id/graph"/>
 ```
 
-```
-#!java
+```java
 
 ArrayList<Bar> points = new ArrayList<Bar>();
 Bar d = new Bar();
@@ -84,8 +82,7 @@ g.setUnit("$");
 
 #PieGraph View
 
-```
-#!xml
+```xml
 
 <com.echo.holographlibrary.PieGraph
         android:layout_width="match_parent"
@@ -93,8 +90,7 @@ g.setUnit("$");
         android:id="@+id/graph"/>
 ```
 
-```
-#!java
+```java
 
 PieGraph pg = (PieGraph)findViewById(R.id.graph);
 PieSlice slice = new PieSlice();
