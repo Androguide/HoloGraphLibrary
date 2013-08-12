@@ -28,7 +28,8 @@ import android.graphics.Path;
 import android.graphics.Region;
 
 public class LinePoint {
-	private float x = 0;
+
+    private float x = 0;
 	private float y = 0;
 	private Path path;
 	private Region region;

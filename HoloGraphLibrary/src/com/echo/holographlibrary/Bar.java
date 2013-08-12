@@ -23,12 +23,12 @@
 
 package com.echo.holographlibrary;
 
-import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.Region;
 
 public class Bar {
-	private int color;
+
+    private int color;
 	private String name;
 	private float value;
 	private Path path;
