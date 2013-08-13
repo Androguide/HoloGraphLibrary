@@ -23,29 +23,15 @@
 
 package com.echo.holographlibrary;
 
-import java.util.ArrayList;
-
-import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
-
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.AvoidXfermode;
-import android.graphics.Bitmap;
+import android.graphics.*;
 import android.graphics.Bitmap.Config;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Point;
 import android.graphics.Path.Direction;
-import android.graphics.PixelFormat;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Region;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
+
+import java.util.ArrayList;
 
 public class LineGraph extends View {
 	
@@ -60,8 +46,8 @@ public class LineGraph extends View {
 	private OnPointClickedListener listener;
 	private Bitmap fullImage;
 	private boolean shouldUpdate = false;
-	private boolean showMinandMax = false;
-	private boolean showHorizontalGrid = false;
+    private boolean showMinAndMax = false;
+    private boolean showHorizontalGrid = false;
 	private int gridColor = 0xffffffff;
 	
 	public LineGraph(Context context){
@@ -83,8 +69,8 @@ public class LineGraph extends View {
 	}
 	public void showMinAndMaxValues(boolean show)
 	{
-		showMinandMax = show;
-	}
+        showMinAndMax = show;
+    }
 	public void setTextColor(int color)
 	{
 		txtPaint.setColor(color);
@@ -204,8 +190,8 @@ public class LineGraph extends View {
 			
 			float bottomPadding = 1, topPadding = 0;
 			float sidePadding = 10;
-			if(this.showMinandMax)
-				sidePadding = txtPaint.measureText(max);
+            if (this.showMinAndMax)
+                sidePadding = txtPaint.measureText(max);
 			
 			float usableHeight = getHeight() - bottomPadding - topPadding;
 			float usableWidth = getWidth() - sidePadding;
@@ -214,9 +200,9 @@ public class LineGraph extends View {
 			int lineCount = 0;
 			for (Line line : lines){
 				int count = 0;
-				float firstXPixels = 0, lastXPixels = 0, newYPixels = 0;
-				float lastYPixels = 0, newXPixels = 0;
-				float maxY = getMaxY();
+                float lastXPixels = 0, newYPixels;
+                float lastYPixels = 0, newXPixels;
+                float maxY = getMaxY();
 				float minY = getMinY();
 				float maxX = getMaxX();
 				float minX = getMinX();
@@ -238,7 +224,6 @@ public class LineGraph extends View {
 						if (count == 0){
 							lastXPixels = sidePadding + (xPercent*usableWidth);
 							lastYPixels = getHeight() - bottomPadding - (usableHeight*yPercent);
-							firstXPixels = lastXPixels;
 							path.moveTo(lastXPixels, lastYPixels);
 						} else {
 							newXPixels = sidePadding + (xPercent*usableWidth);
@@ -297,9 +282,9 @@ public class LineGraph extends View {
 			
 			for (Line line : lines){
 				int count = 0;
-				float lastXPixels = 0, newYPixels = 0;
-				float lastYPixels = 0, newXPixels = 0;
-				float maxY = getMaxY();
+                float lastXPixels = 0, newYPixels;
+                float lastYPixels = 0, newXPixels;
+                float maxY = getMaxY();
 				float minY = getMinY();
 				float maxX = getMaxX();
 				float minX = getMinX();
@@ -367,8 +352,7 @@ public class LineGraph extends View {
 			}
 			
 			shouldUpdate = false;
-			if(this.showMinandMax)
-			{
+            if (this.showMinAndMax) {
 				ca.drawText(max, 0, txtPaint.getTextSize(), txtPaint);
 				ca.drawText(min,0,this.getHeight(),txtPaint);
 			}
@@ -388,20 +372,20 @@ public class LineGraph extends View {
 	    
 	    int count = 0;
 	    int lineCount = 0;
-	    int pointCount = 0;
-	    
-	    Region r = new Region();
+        int pointCount;
+
+        Region r = new Region();
 	    for (Line line : lines){
 	    	pointCount = 0;
 	    	for (LinePoint p : line.getPoints()){
 	    		
 	    		if (p.getPath() != null && p.getRegion() != null){
 	    			r.setPath(p.getPath(), p.getRegion());
-			    	if (r.contains((int)point.x,(int) point.y) && event.getAction() == MotionEvent.ACTION_DOWN){
-			    		indexSelected = count;
+                    if (r.contains(point.x, point.y) && event.getAction() == MotionEvent.ACTION_DOWN) {
+                        indexSelected = count;
 			    	} else if (event.getAction() == MotionEvent.ACTION_UP){
-			    		if (r.contains((int)point.x,(int) point.y) && listener != null){
-			    			listener.onClick(lineCount, pointCount);
+                        if (r.contains(point.x, point.y) && listener != null) {
+                            listener.onClick(lineCount, pointCount);
 			    		}
 			    		indexSelected = -1;
 			    	}
@@ -418,8 +402,6 @@ public class LineGraph extends View {
 	    	shouldUpdate = true;
 	    	postInvalidate();
 	    }
-	    
-	    
 
 	    return true;
 	}

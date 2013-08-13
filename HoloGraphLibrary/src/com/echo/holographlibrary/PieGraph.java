@@ -23,24 +23,14 @@
 
 package com.echo.holographlibrary;
 
-import java.util.ArrayList;
-
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
+import android.graphics.*;
 import android.graphics.Path.Direction;
-import android.graphics.PixelFormat;
-import android.graphics.Point;
-import android.graphics.RectF;
-import android.graphics.Region;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
+
+import java.util.ArrayList;
 
 public class PieGraph extends View {
 
@@ -68,8 +58,8 @@ public class PieGraph extends View {
 		path.reset();
 		
 		float currentAngle = 270;
-		float currentSweep = 0;
-		int totalValue = 0;
+        float currentSweep;
+        int totalValue = 0;
 		float padding = 2;
 		
 		midX = getWidth()/2;
@@ -136,11 +126,11 @@ public class PieGraph extends View {
 	    for (PieSlice slice : slices){
 	    	Region r = new Region();
 	    	r.setPath(slice.getPath(), slice.getRegion());
-	    	if (r.contains((int)point.x,(int) point.y) && event.getAction() == MotionEvent.ACTION_DOWN){
-	    		indexSelected = count;
+            if (r.contains(point.x, point.y) && event.getAction() == MotionEvent.ACTION_DOWN) {
+                indexSelected = count;
 	    	} else if (event.getAction() == MotionEvent.ACTION_UP){
-	    		if (r.contains((int)point.x,(int) point.y) && listener != null){
-	    			if (indexSelected > -1){
+                if (r.contains(point.x, point.y) && listener != null) {
+                    if (indexSelected > -1){
 		    			listener.onClick(indexSelected);
 	    			}
 	    			indexSelected = -1;
