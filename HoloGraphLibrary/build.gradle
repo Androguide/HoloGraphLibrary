@@ -3,18 +3,25 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.4'
+        classpath 'com.android.tools.build:gradle:0.7+'
     }
 }
 apply plugin: 'android-library'
 
-dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
+repositories {
+    mavenCentral()
+
+    maven { url "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases" }
 }
 
 android {
-    compileSdkVersion 17
-    buildToolsVersion "17.0.0"
+    compileSdkVersion 19
+    buildToolsVersion "18.1.1"
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 19
+    }
 
     sourceSets {
         main {
@@ -29,4 +36,9 @@ android {
 
         instrumentTest.setRoot('tests')
     }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:19.0.0'
+    compile 'org.jetbrains:annotations:7.0.2'
 }
