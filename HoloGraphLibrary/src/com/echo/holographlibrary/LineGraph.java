@@ -194,7 +194,7 @@ public class LineGraph extends View {
                 sidePadding = txtPaint.measureText(max);
 			
 			float usableHeight = getHeight() - bottomPadding - topPadding;
-			float usableWidth = getWidth() - sidePadding;
+			float usableWidth = getWidth() - sidePadding*2;
 			float lineSpace = usableHeight/10;
 			
 			int lineCount = 0;
