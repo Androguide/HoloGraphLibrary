@@ -64,6 +64,7 @@ public class BarGraph extends View {
 
     public void setBars(ArrayList<Bar> points) {
         this.points = points;
+        shouldUpdate = true;
         postInvalidate();
     }
 
