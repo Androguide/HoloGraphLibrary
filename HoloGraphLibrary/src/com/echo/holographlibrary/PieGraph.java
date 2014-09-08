@@ -37,6 +37,8 @@ public class PieGraph extends Graph {
 	private ArrayList<PieSlice> slices = new ArrayList<PieSlice>();
 	private Paint paint = new Paint();
 	private Path path = new Path();
+    private Paint textPaint = new Paint();
+    private boolean showKey = true;
 	
 	private int indexSelected = -1;
 	private int thickness = (int) convertToPx(25, DP);
@@ -45,9 +47,11 @@ public class PieGraph extends Graph {
 	
 	public PieGraph(Context context) {
 		super(context);
+        textPaint.setTextSize(convertToPx(20, SP));
 	}
 	public PieGraph(Context context, AttributeSet attrs) {
 		super(context, attrs);
+        textPaint.setTextSize(convertToPx(20, SP));
 	}
 	
 	public void onDraw(Canvas canvas) {
@@ -61,9 +65,12 @@ public class PieGraph extends Graph {
         float currentSweep;
         int totalValue = 0;
 		float padding = convertToPx(2, DP);
+        float keyPadding = convertToPx(5, DP);
+        float keyOffsetLeft = convertToPx(15, DP);
+        float keyOffsetBottom = convertToPx(15, DP);
 		
-		midX = getWidth()/2;
-		midY = getHeight()/2;
+		midX = getWidth() / (showKey ? 4 : 2);
+		midY = getHeight() / 2;
 		if (midX < midY){
 			radius = midX;
 		} else {
@@ -71,13 +78,22 @@ public class PieGraph extends Graph {
 		}
 		radius -= padding;
 		innerRadius = radius - thickness;
-		
-		for (PieSlice slice : slices){
+
+        float size = 0;
+		for (PieSlice slice : slices) {
+            // Calculate the total value of the pie chart
 			totalValue += slice.getValue();
+
+            // Calculate the size of the legend
+            size = Math.max(size, textPaint.getTextSize() + keyPadding + keyOffsetLeft + textPaint.measureText(slice.getTitle()));
 		}
+
+        // Translate the canvas so everything is centered
+        if(showKey) canvas.translate(size / 2, 0);
 		
 		int count = 0;
 		for (PieSlice slice : slices){
+            // Draw the slice
 			Path p = new Path();
 			paint.setColor(slice.getColor());
 			currentSweep = (slice.getValue()/totalValue)*(360);
@@ -106,13 +122,18 @@ public class PieGraph extends Graph {
 				canvas.drawPath(path, paint);
 				paint.setAlpha(255);
 			}
-			
+
+            if(showKey) {
+                // Add key to bottom right
+                textPaint.setColor(slice.getColor());
+                canvas.drawText(slice.getTitle(), getWidth() / 2 + textPaint.getTextSize() + keyPadding + keyOffsetLeft, getHeight() - keyOffsetBottom - (count * (textPaint.getTextSize() + keyPadding)), textPaint);
+                canvas.drawRect(getWidth() / 2 + keyOffsetLeft, getHeight() - keyOffsetBottom - textPaint.getTextSize() - (count * (textPaint.getTextSize() + keyPadding)), getWidth() / 2 + textPaint.getTextSize() + keyOffsetLeft, getHeight() - keyOffsetBottom - (count * (textPaint.getTextSize() + keyPadding)), textPaint);
+            }
+
+			// Increment values
 			currentAngle = currentAngle+currentSweep;
-			
 			count++;
 		}
-		
-		
 	}
 	
 	@Override
@@ -181,6 +202,16 @@ public class PieGraph extends Graph {
 		}
 		postInvalidate();
 	}
+
+    public void setTextSize(float size) {
+        textPaint.setTextSize(size);
+        invalidate();
+    }
+
+    public void showKey(boolean show) {
+        showKey = show;
+        invalidate();
+    }
 
 	public static interface OnSliceClickedListener {
 		public abstract void onClick(int index);
