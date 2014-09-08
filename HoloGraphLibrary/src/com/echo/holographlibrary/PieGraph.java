@@ -38,13 +38,17 @@ public class PieGraph extends Graph {
 	private Paint paint = new Paint();
 	private Path path = new Path();
     private Paint textPaint = new Paint();
-    private boolean showKey = true;
+    private boolean showKey = false;
 	
 	private int indexSelected = -1;
 	private int thickness = (int) convertToPx(25, DP);
 	private OnSliceClickedListener listener;
-	
-	
+
+    float padding = convertToPx(2, DP);
+    float keyPadding = convertToPx(5, DP);
+    float keyOffsetLeft = convertToPx(15, DP);
+    float keyOffsetBottom = convertToPx(15, DP);
+
 	public PieGraph(Context context) {
 		super(context);
         textPaint.setTextSize(convertToPx(20, SP));
@@ -64,10 +68,6 @@ public class PieGraph extends Graph {
 		float currentAngle = 270;
         float currentSweep;
         int totalValue = 0;
-		float padding = convertToPx(2, DP);
-        float keyPadding = convertToPx(5, DP);
-        float keyOffsetLeft = convertToPx(15, DP);
-        float keyOffsetBottom = convertToPx(15, DP);
 		
 		midX = getWidth() / (showKey ? 4 : 2);
 		midY = getHeight() / 2;
@@ -138,15 +138,21 @@ public class PieGraph extends Graph {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-
 	    Point point = new Point();
 	    point.x = (int) event.getX();
 	    point.y = (int) event.getY();
-	    
+
+        float size = 0;
+        for (PieSlice slice : slices) {
+            // Calculate the size of the legend
+            size = Math.max(size, textPaint.getTextSize() + keyPadding + keyOffsetLeft + textPaint.measureText(slice.getTitle()));
+        }
+
 	    int count = 0;
 	    for (PieSlice slice : slices){
 	    	Region r = new Region();
 	    	r.setPath(slice.getPath(), slice.getRegion());
+            if(showKey) r.translate((int) size / 2, 0);
             if (r.contains(point.x, point.y) && event.getAction() == MotionEvent.ACTION_DOWN) {
                 indexSelected = count;
 	    	} else if (event.getAction() == MotionEvent.ACTION_UP){
