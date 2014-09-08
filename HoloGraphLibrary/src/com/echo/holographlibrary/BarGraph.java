@@ -34,10 +34,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-public class BarGraph extends View {
-    private static final int DP = TypedValue.COMPLEX_UNIT_DIP;
-    private static final int SP = TypedValue.COMPLEX_UNIT_SP;
-
+public class BarGraph extends Graph {
     private ArrayList<Bar> points = new ArrayList<Bar>();
     private Paint p = new Paint();
     private Path path = new Path();
@@ -197,10 +194,6 @@ public class BarGraph extends View {
 
 
         return true;
-    }
-
-    private float convertToPx(int value, int unit) {
-        return TypedValue.applyDimension(unit, value, getContext().getResources().getDisplayMetrics());
     }
 
     public void setOnBarClickedListener(OnBarClickedListener listener) {

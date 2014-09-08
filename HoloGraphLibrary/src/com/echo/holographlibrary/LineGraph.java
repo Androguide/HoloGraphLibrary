@@ -33,7 +33,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-public class LineGraph extends View {
+public class LineGraph extends Graph {
 	
 	private ArrayList<Line> lines = new ArrayList<Line>();
 	private Paint paint = new Paint();
@@ -49,6 +49,8 @@ public class LineGraph extends View {
     private boolean showMinAndMax = false;
     private boolean showHorizontalGrid = false;
 	private int gridColor = 0xffffffff;
+    private String yAxisTitle = null;
+    private String xAxisTitle = null;
 	
 	public LineGraph(Context context){
 		this(context,null);
@@ -56,7 +58,7 @@ public class LineGraph extends View {
 	public LineGraph(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		txtPaint.setColor(0xffffffff);
-		txtPaint.setTextSize(20);
+		txtPaint.setTextSize(convertToPx(20, SP));
 		txtPaint.setAntiAlias(true);
 	}
 	public void setGridColor(int color)
@@ -189,7 +191,7 @@ public class LineGraph extends View {
 			Path path = new Path();
 			
 			float bottomPadding = 1, topPadding = 0;
-			float sidePadding = 10;
+			float sidePadding = convertToPx(10, DP);
             if (this.showMinAndMax)
                 sidePadding = txtPaint.measureText(max);
 			
@@ -211,7 +213,7 @@ public class LineGraph extends View {
 					paint.setColor(Color.BLACK);
 					paint.setAlpha(30);
 					paint.setStrokeWidth(2);
-					for (int i = 10; i-getWidth() < getHeight(); i = i+20){
+					for (int i = (int) convertToPx(5, DP); i-getWidth() < getHeight(); i += convertToPx(10, DP)){
 						canvas.drawLine(i, getHeight()-bottomPadding, 0, getHeight()-bottomPadding-i, paint);
 					}
 					
@@ -273,7 +275,7 @@ public class LineGraph extends View {
 			paint.setAntiAlias(true);
 			canvas.drawLine(sidePadding, getHeight() - bottomPadding, getWidth(), getHeight()-bottomPadding, paint);
 			if(this.showHorizontalGrid)
-				for(int i=1;i<=10;i++)
+				for(int i=1;i<=convertToPx(10, DP);i++)
 				{
 					canvas.drawLine(sidePadding, getHeight() - bottomPadding-(i*lineSpace), getWidth(), getHeight()-bottomPadding-(i*lineSpace), paint);
 				}
@@ -290,7 +292,7 @@ public class LineGraph extends View {
 				float minX = getMinX();
 				
 				paint.setColor(line.getColor());
-				paint.setStrokeWidth(6);
+				paint.setStrokeWidth(convertToPx(3, DP));
 				
 				for (LinePoint p : line.getPoints()){
 					float yPercent = (p.getY()-minY)/(maxY - minY);
@@ -319,7 +321,7 @@ public class LineGraph extends View {
 				float minX = getMinX();
 				
 				paint.setColor(line.getColor());
-				paint.setStrokeWidth(6);
+				paint.setStrokeWidth(convertToPx(6, DP));
 				paint.setStrokeCap(Paint.Cap.ROUND);
 				
 				if (line.isShowingPoints()){
@@ -330,14 +332,14 @@ public class LineGraph extends View {
 						float yPixels = getHeight() - bottomPadding - (usableHeight*yPercent);
 						
 						paint.setColor(Color.GRAY);
-						canvas.drawCircle(xPixels, yPixels, 10, paint);
+						canvas.drawCircle(xPixels, yPixels, convertToPx(6, DP), paint);
 						paint.setColor(Color.WHITE);
-						canvas.drawCircle(xPixels, yPixels, 5, paint);
+						canvas.drawCircle(xPixels, yPixels, convertToPx(3, DP), paint);
 						
 						Path path2 = new Path();
-						path2.addCircle(xPixels, yPixels, 30, Direction.CW);
+						path2.addCircle(xPixels, yPixels, convertToPx(30, DP), Direction.CW);
 						p.setPath(path2);
-						p.setRegion(new Region((int)(xPixels-30), (int)(yPixels-30), (int)(xPixels+30), (int)(yPixels+30)));
+						p.setRegion(new Region((int)(xPixels-convertToPx(30, DP)), (int)(yPixels-convertToPx(30, DP)), (int)(xPixels+convertToPx(30, DP)), (int)(yPixels+convertToPx(30, DP))));
 						
 						if (indexSelected == pointCount && listener != null){
 							paint.setColor(Color.parseColor("#33B5E5"));

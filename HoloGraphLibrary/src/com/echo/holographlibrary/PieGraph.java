@@ -32,14 +32,14 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-public class PieGraph extends View {
+public class PieGraph extends Graph {
 
 	private ArrayList<PieSlice> slices = new ArrayList<PieSlice>();
 	private Paint paint = new Paint();
 	private Path path = new Path();
 	
 	private int indexSelected = -1;
-	private int thickness = 50;
+	private int thickness = (int) convertToPx(25, DP);
 	private OnSliceClickedListener listener;
 	
 	
@@ -60,7 +60,7 @@ public class PieGraph extends View {
 		float currentAngle = 270;
         float currentSweep;
         int totalValue = 0;
-		float padding = 2;
+		float padding = convertToPx(2, DP);
 		
 		midX = getWidth()/2;
 		midY = getHeight()/2;
