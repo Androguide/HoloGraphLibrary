@@ -24,13 +24,19 @@
 package com.echo.holographlibrary;
 
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Region;
 import android.graphics.drawable.NinePatchDrawable;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.MotionEvent;
-import android.view.View;
 
 import java.util.ArrayList;
 
