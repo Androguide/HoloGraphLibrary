@@ -148,6 +148,7 @@ public class PieGraph extends Graph {
             size = Math.max(size, textPaint.getTextSize() + keyPadding + keyOffsetLeft + textPaint.measureText(slice.getTitle()));
         }
 
+        indexSelected = -1;
 	    int count = 0;
 	    for (PieSlice slice : slices){
 	    	Region r = new Region();
@@ -170,8 +171,6 @@ public class PieGraph extends Graph {
 	    if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_UP){
 	    	postInvalidate();
 	    }
-	    
-	    
 
 	    return true;
 	}
