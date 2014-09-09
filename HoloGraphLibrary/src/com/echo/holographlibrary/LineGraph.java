@@ -401,7 +401,6 @@ public class LineGraph extends Graph {
         Matrix m = new Matrix();
 
         if(xAxisTitle != null) {
-//            m.postTranslate(0, txtPaint.getTextSize());
             m.preScale(1, (getHeight() - txtPaint.getTextSize()) / getHeight());
         }
 
