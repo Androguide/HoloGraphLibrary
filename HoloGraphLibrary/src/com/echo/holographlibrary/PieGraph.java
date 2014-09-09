@@ -38,7 +38,6 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 
 public class PieGraph extends Graph {
-
     private ArrayList<PieSlice> slices = new ArrayList<PieSlice>();
     private Paint paint = new Paint();
     private Path path = new Path();
@@ -101,7 +100,7 @@ public class PieGraph extends Graph {
         for (PieSlice slice : slices) {
             // Draw the slice
             Path p = new Path();
-            paint.setColor(slice.getColor());
+            paint.setColor(slice.getColor() == -1 ? DEFAULT_COLORS.get(count % DEFAULT_COLORS.size()) : slice.getColor());
             currentSweep = (slice.getValue() / totalValue) * (360);
             p.arcTo(new RectF(midX - radius, midY - radius, midX + radius, midY + radius), currentAngle + padding, currentSweep - padding);
             p.arcTo(new RectF(midX - innerRadius, midY - innerRadius, midX + innerRadius, midY + innerRadius), (currentAngle + padding) + (currentSweep - padding), -(currentSweep - padding));
@@ -113,7 +112,6 @@ public class PieGraph extends Graph {
 
             if (indexSelected == count && listener != null) {
                 path.reset();
-                paint.setColor(slice.getColor());
                 paint.setColor(Color.parseColor("#33B5E5"));
                 paint.setAlpha(100);
 
@@ -131,9 +129,9 @@ public class PieGraph extends Graph {
 
             if (showKey) {
                 // Add key to bottom right
-                textPaint.setColor(slice.getColor());
-                canvas.drawText(slice.getTitle(), getWidth() / 2 + textPaint.getTextSize() + keyPadding + keyOffsetLeft, getHeight() - keyOffsetBottom - (count * (textPaint.getTextSize() + keyPadding)), textPaint);
+                textPaint.setColor(paint.getColor());
                 canvas.drawRect(getWidth() / 2 + keyOffsetLeft, getHeight() - keyOffsetBottom - textPaint.getTextSize() - (count * (textPaint.getTextSize() + keyPadding)), getWidth() / 2 + textPaint.getTextSize() + keyOffsetLeft, getHeight() - keyOffsetBottom - (count * (textPaint.getTextSize() + keyPadding)), textPaint);
+                canvas.drawText(slice.getTitle(), getWidth() / 2 + textPaint.getTextSize() + keyPadding + keyOffsetLeft, getHeight() - keyOffsetBottom - textPaint.getTextSize() / 8 - (count * (textPaint.getTextSize() + keyPadding)), textPaint);
             }
 
             // Increment values

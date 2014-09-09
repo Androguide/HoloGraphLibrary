@@ -27,8 +27,7 @@ import android.graphics.Path;
 import android.graphics.Region;
 
 public class Bar {
-
-    private int color;
+    private int color = -1;
 	private String name;
 	private float value;
 	private Path path;

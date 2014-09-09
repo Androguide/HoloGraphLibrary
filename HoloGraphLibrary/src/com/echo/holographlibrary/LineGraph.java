@@ -386,7 +386,7 @@ public class LineGraph extends Graph {
             }
 
             if(xAxisTitle != null) {
-                ca.drawText(xAxisTitle, (getWidth() - txtPaint.measureText(xAxisTitle)) / 2, getHeight(), txtPaint);
+                ca.drawText(xAxisTitle, (getWidth() - txtPaint.measureText(xAxisTitle)) / 2, getHeight() - txtPaint.getTextSize() / 3, txtPaint);
             }
 
             if(yAxisTitle != null) {

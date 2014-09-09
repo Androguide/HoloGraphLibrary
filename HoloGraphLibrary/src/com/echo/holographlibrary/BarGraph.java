@@ -50,7 +50,7 @@ public class BarGraph extends Graph {
     private OnBarClickedListener listener;
     private Bitmap fullImage;
     private boolean shouldUpdate = false;
-    private String unit = "$";
+    private String unit = "";
     private Boolean append = false;
     private Rect r2 = new Rect();
     private Rect r3 = new Rect();
@@ -108,12 +108,11 @@ public class BarGraph extends Graph {
             float usableHeight;
             if (showBarText) {
                 this.p.setTextSize(convertToPx(20, SP));
-                this.p.getTextBounds(unit, 0, 1, r3);
+                this.p.getTextBounds(unit, 0, unit.length(), r3);
                 usableHeight = getHeight() - bottomPadding - Math.abs(r3.top - r3.bottom) - convertToPx(26, DP);
             } else {
                 usableHeight = getHeight() - bottomPadding;
             }
-
 
             p.setColor(Color.BLACK);
             p.setStrokeWidth(convertToPx(2, DP));
@@ -140,7 +139,7 @@ public class BarGraph extends Graph {
                 p.setPath(path);
                 p.setRegion(new Region(r.left - selectPadding, r.top - selectPadding, r.right + selectPadding, r.bottom + selectPadding));
 
-                this.p.setColor(p.getColor());
+                this.p.setColor(p.getColor() == -1 ? DEFAULT_COLORS.get(count % DEFAULT_COLORS.size()) : p.getColor());
                 this.p.setAlpha(255);
                 canvas.drawRect(r, this.p);
                 this.p.setTextSize(convertToPx(20, SP));
