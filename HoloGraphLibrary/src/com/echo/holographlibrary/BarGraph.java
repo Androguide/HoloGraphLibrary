@@ -110,7 +110,7 @@ public class BarGraph extends Graph {
             if (showBarText) {
                 this.p.setTextSize(convertToPx(20, SP));
                 this.p.getTextBounds(unit+"1", 0, unit.length()+1, r3);
-                usableHeight = getHeight() - bottomPadding - Math.abs(r3.top - r3.bottom) - convertToPx(26, DP);
+                usableHeight = getHeight() - bottomPadding - Math.abs(r3.top - r3.bottom) - convertToPx(30, DP);
             } else {
                 usableHeight = getHeight() - bottomPadding;
             }
