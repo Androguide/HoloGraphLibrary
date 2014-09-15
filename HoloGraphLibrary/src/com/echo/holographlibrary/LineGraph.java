@@ -240,11 +240,9 @@ public class LineGraph extends Graph {
 
             float topPadding = 0, bottomPadding = 0, leftPadding = 0, rightPadding = 0;
             if (showAxisValues) {
-                bottomPadding = leftPadding = numPaint.getTextSize() * 1.5f;
+                bottomPadding = leftPadding = numPaint.getTextSize() * 2f;
                 rightPadding = numPaint.measureText(maxX+"") / 2;
                 topPadding = numPaint.measureText(maxY+"") / 2;
-                System.out.println("Right p: "+rightPadding);
-                System.out.println("Top p: "+topPadding);
             }
 
             float usableHeight = getHeight() - bottomPadding - topPadding;
@@ -472,7 +470,7 @@ public class LineGraph extends Graph {
                 ca.rotate(-90, getWidth() / 2, getHeight() / 2);
                 ca.translate(0, getHeight() / 2);
                 ca.translate(0, -getWidth() / 2);
-                ca.drawText(yAxisTitle, (getWidth() - txtPaint.measureText(yAxisTitle)) / 2 , txtPaint.getTextSize() * 2 / 3, txtPaint);
+                ca.drawText(yAxisTitle, (getWidth() - txtPaint.measureText(yAxisTitle)) / 2 , txtPaint.getTextSize() * 4 / 5, txtPaint);
                 ca.restore();
             }
 
