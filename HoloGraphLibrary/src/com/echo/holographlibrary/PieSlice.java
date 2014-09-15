@@ -29,7 +29,7 @@ import android.graphics.Region;
 
 public class PieSlice {
 
-    private int color = Color.BLACK;
+    private int color = -1;
     private float value;
     private String title;
     private Path path;
