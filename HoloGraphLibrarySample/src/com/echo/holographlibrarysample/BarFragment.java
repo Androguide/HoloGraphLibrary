@@ -33,6 +33,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
 import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
+import com.echo.holographlibrary.BarStackSegment;
 
 import java.util.ArrayList;
 
@@ -52,8 +53,15 @@ public class BarFragment extends SherlockFragment {
 		d2.setColor(Color.parseColor("#FFBB33"));
 		d2.setName("Test2");
 		d2.setValue(20);
+        Bar d3 = new Bar();
+        d3.setColor(Color.parseColor("#FFBB33"));
+        d3.setName("Test3");
+        d3.setStackedBar(true);
+        d3.AddStackValue(new BarStackSegment(2, Color.parseColor("#FFBB33")));
+        d3.AddStackValue(new BarStackSegment(4, Color.RED));
 		points.add(d);
 		points.add(d2);
+        points.add(d3);
 
         BarGraph g = (BarGraph)v.findViewById(R.id.bargraph);
         assert g != null;
