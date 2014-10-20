@@ -26,6 +26,8 @@ package com.echo.holographlibrary;
 import android.graphics.Path;
 import android.graphics.Region;
 
+import java.util.ArrayList;
+
 public class Bar {
 
     private int color;
@@ -33,6 +35,8 @@ public class Bar {
 	private float value;
 	private Path path;
 	private Region region;
+    private boolean isStackedBar;
+    private ArrayList<BarStackSegment> values = new ArrayList<BarStackSegment>();
 	
 	public int getColor() {
 		return color;
@@ -64,5 +68,17 @@ public class Bar {
 	public void setRegion(Region region) {
 		this.region = region;
 	}
+    public void setStackedBar(boolean stacked){
+        isStackedBar = stacked;
+    }
+    public boolean getStackedBar(){
+        return isStackedBar;
+    }
+    public void AddStackValue(BarStackSegment val){
+        values.add(val);
+    }
+    public ArrayList<BarStackSegment> getStackedValues(){
+        return values;
+    }
 	
 }
