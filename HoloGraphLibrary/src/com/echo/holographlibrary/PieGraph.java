@@ -49,7 +49,9 @@ public class PieGraph extends View {
 	public PieGraph(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
-	
+
+    public void update() { postInvalidate(); }
+
 	public void onDraw(Canvas canvas) {
 		canvas.drawColor(Color.TRANSPARENT);
 		paint.reset();
