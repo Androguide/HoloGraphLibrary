@@ -68,6 +68,11 @@ public class BarGraph extends View {
         postInvalidate();
     }
 
+    public void update() {
+        shouldUpdate = true;
+        postInvalidate();
+    }
+
     public void setUnit(String unit) {
         this.unit = unit;
     }
