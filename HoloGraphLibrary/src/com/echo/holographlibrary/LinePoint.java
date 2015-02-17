@@ -33,7 +33,7 @@ public class LinePoint {
 	private float y = 0;
 	private Path path;
 	private Region region;
-	
+	private String label_string; 
 	public LinePoint(float x, float y) {
 		super();
 		this.x = x;
@@ -72,6 +72,14 @@ public class LinePoint {
 
 	public void setPath(Path path) {
 		this.path = path;
+	}
+	
+	public String getLabel_string() {
+		return label_string;
+	}
+
+	public void setLabel_string(String label_string) {
+		this.label_string = label_string;
 	}
 
 }
