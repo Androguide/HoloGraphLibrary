@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile 'com.android.support:support-v4:21.0.3'
     compile project(':HoloGraphLibrary')
