@@ -41,5 +41,5 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:21.0.3'
-    compile 'org.jetbrains:annotations:7.0.2'
+    compile 'com.intellij:annotations:+@jar'
 }
