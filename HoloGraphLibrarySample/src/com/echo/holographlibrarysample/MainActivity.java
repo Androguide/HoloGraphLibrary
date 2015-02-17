@@ -28,14 +28,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 
 import java.util.ArrayList;
 
-public class MainActivity extends SherlockFragmentActivity {
+public class MainActivity extends ActionBarActivity {
 
 	ViewPager mViewPager;
     TabsAdapter mTabsAdapter;
@@ -70,6 +68,26 @@ public class MainActivity extends SherlockFragmentActivity {
         private final ViewPager mViewPager;
         private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
         private final ArrayList<Fragment> mFrag = new ArrayList<Fragment>();
+
+        @Override
+        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+            Object tag = tab.getTag();
+            for (int i=0; i<mTabs.size(); i++) {
+                if (mTabs.get(i) == tag) {
+                    mViewPager.setCurrentItem(i);
+                }
+            }
+        }
+
+        @Override
+        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+        }
+
+        @Override
+        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+        }
 
         static final class TabInfo {
             private final Class<?> clss;
@@ -127,24 +145,6 @@ public class MainActivity extends SherlockFragmentActivity {
 
         @Override
         public void onPageScrollStateChanged(int state) {
-        }
-
-        @Override
-        public void onTabSelected(Tab tab, FragmentTransaction ft) {
-            Object tag = tab.getTag();
-            for (int i=0; i<mTabs.size(); i++) {
-                if (mTabs.get(i) == tag) {
-                    mViewPager.setCurrentItem(i);
-                }
-            }
-        }
-
-        @Override
-        public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-        }
-
-        @Override
-        public void onTabReselected(Tab tab, FragmentTransaction ft) {
         }
     }
 

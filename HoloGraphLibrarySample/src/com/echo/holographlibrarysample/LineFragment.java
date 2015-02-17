@@ -23,21 +23,19 @@
 
 package com.echo.holographlibrarysample;
 
-import java.util.ArrayList;
-
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.echo.holographlibrary.Line;
 import com.echo.holographlibrary.LineGraph;
 import com.echo.holographlibrary.LineGraph.OnPointClickedListener;
 import com.echo.holographlibrary.LinePoint;
 
-public class LineFragment extends SherlockFragment {
+public class LineFragment extends Fragment {
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
