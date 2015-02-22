@@ -25,11 +25,11 @@ package com.echo.holographlibrarysample;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.echo.holographlibrary.Bar;
 import com.echo.holographlibrary.BarGraph;
 import com.echo.holographlibrary.BarGraph.OnBarClickedListener;
@@ -37,7 +37,7 @@ import com.echo.holographlibrary.BarStackSegment;
 
 import java.util.ArrayList;
 
-public class BarFragment extends SherlockFragment {
+public class BarFragment extends Fragment {
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

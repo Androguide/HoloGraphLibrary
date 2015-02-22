@@ -1,12 +1,13 @@
+apply plugin: 'com.android.library'
+
 buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12+'
+        classpath 'com.android.tools.build:gradle:1.0.1'
     }
 }
-apply plugin: 'android-library'
 
 repositories {
     mavenCentral()
@@ -20,7 +21,7 @@ android {
 
     defaultConfig {
         minSdkVersion 8
-        targetSdkVersion 19
+        targetSdkVersion 21
     }
 
     sourceSets {
@@ -39,6 +40,6 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.0.0'
-    compile 'org.jetbrains:annotations:7.0.2'
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.intellij:annotations:+@jar'
 }
