@@ -26,6 +26,7 @@ package com.echo.holographlibrary;
 import android.content.Context;
 import android.graphics.*;
 import android.graphics.Bitmap.Config;
+import android.graphics.Paint.Align;
 import android.graphics.Path.Direction;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -49,6 +50,7 @@ public class LineGraph extends View {
     private boolean showMinAndMax = false;
     private boolean showHorizontalGrid = false;
 	private int gridColor = 0xffffffff;
+	private int labelSize = 10;
 	
 	public LineGraph(Context context){
 		this(context,null);
@@ -188,10 +190,13 @@ public class LineGraph extends View {
 			paint.reset();
 			Path path = new Path();
 			
-			float bottomPadding = 1, topPadding = 0;
+			float bottomPadding = 10, topPadding = 10;
 			float sidePadding = 10;
             if (this.showMinAndMax)
                 sidePadding = txtPaint.measureText(max);
+            if (labelSize > bottomPadding) {
+				bottomPadding = labelSize;
+			} 
 			
 			float usableHeight = getHeight() - bottomPadding - topPadding;
 			float usableWidth = getWidth() - sidePadding*2;
@@ -280,6 +285,9 @@ public class LineGraph extends View {
 			paint.setAlpha(255);
 			
 			
+			paint.setTextAlign(Align.CENTER);
+			paint.setTextSize(labelSize);
+			
 			for (Line line : lines){
 				int count = 0;
                 float lastXPixels = 0, newYPixels;
@@ -305,6 +313,9 @@ public class LineGraph extends View {
 						lastXPixels = newXPixels;
 						lastYPixels = newYPixels;
 					}
+					if (p.getLabel_string()!=null) {
+						canvas.drawText(p.getLabel_string(), lastXPixels, usableHeight+bottomPadding, paint);
+					} 
 					count++;
 				}
 			}
@@ -410,6 +421,13 @@ public class LineGraph extends View {
 		this.listener = listener;
 	}
 	
+	public int getLabelSize() {
+		return labelSize;
+	}
+	public void setLabelSize(int labelSize) {
+		this.labelSize = labelSize;
+	}
+
 	public interface OnPointClickedListener {
 		abstract void onClick(int lineIndex, int pointIndex);
 	}
