@@ -139,7 +139,7 @@ public class BarGraph extends View {
 
                 if(p.getStackedBar()){
                     ArrayList<BarStackSegment> values = new ArrayList<BarStackSegment>(p.getStackedValues());
-                    int prevValue = 0;
+                    float prevValue = 0;
                     for(BarStackSegment value : values) {
                         value.Value += prevValue;
                         prevValue += value.Value;
