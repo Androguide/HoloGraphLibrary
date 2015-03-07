@@ -74,7 +74,7 @@ public class Bar {
     public boolean getStackedBar(){
         return isStackedBar;
     }
-    public void AddStackValue(BarStackSegment val){
+    public void addStackValue(BarStackSegment val){
         values.add(val);
     }
     public ArrayList<BarStackSegment> getStackedValues(){
