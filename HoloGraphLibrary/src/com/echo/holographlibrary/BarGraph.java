@@ -138,7 +138,17 @@ public class BarGraph extends View {
             for (Bar p : points) {
 
                 if(p.getStackedBar()){
-                    ArrayList<BarStackSegment> values = new ArrayList<BarStackSegment>(p.getStackedValues());
+                    // deep copy of StackedValues
+                    ArrayList<BarStackSegment> values = new ArrayList<BarStackSegment>();
+                    try {
+                        for (BarStackSegment value : p.getStackedValues()) {
+                            values.add((BarStackSegment) value.clone());
+                        }
+                    } catch (CloneNotSupportedException e) {
+                        e.printStackTrace();
+                        continue;
+                    }
+
                     float prevValue = 0;
                     for(BarStackSegment value : values) {
                         value.Value += prevValue;
