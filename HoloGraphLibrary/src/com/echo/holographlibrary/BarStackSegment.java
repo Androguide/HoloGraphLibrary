@@ -6,7 +6,7 @@ package com.echo.holographlibrary;
 public class BarStackSegment {
     public float Value;
     public int Color;
-    public BarStackSegment(int val, int color){
+    public BarStackSegment(float val, int color){
         Value = val;
         Color = color;
     }
