@@ -202,19 +202,24 @@ public class BarGraph extends View {
         point.x = (int) event.getX();
         point.y = (int) event.getY();
 
-        int count = 0;
-        for (Bar bar : points) {
-            Region r = new Region();
-            r.setPath(bar.getPath(), bar.getRegion());
-            if (r.contains(point.x, point.y) && event.getAction() == MotionEvent.ACTION_DOWN) {
-                indexSelected = count;
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (r.contains(point.x, point.y) && listener != null) {
-                    listener.onClick(indexSelected);
+        if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_UP) {
+            // find clicked bar index
+            indexSelected = -1;
+            int count = 0;
+            for (int i = points.size() - 1; i >= 0; i--) {
+                Region r = new Region();
+                r.setPath(points.get(i).getPath(), points.get(i).getRegion());
+                if (r.contains(point.x, point.y)) {
+                    indexSelected = i;
                 }
-                indexSelected = -1;
             }
-            count++;
+        }
+
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            // dispatch onClick event
+            if ((indexSelected != -1) && (listener != null)) {
+                listener.onClick(indexSelected);
+            }
         }
 
         if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_UP) {
