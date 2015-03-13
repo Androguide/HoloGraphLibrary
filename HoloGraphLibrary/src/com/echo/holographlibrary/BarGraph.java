@@ -24,12 +24,21 @@
 package com.echo.holographlibrary;
 
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Region;
 import android.graphics.drawable.NinePatchDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -135,25 +144,27 @@ public class BarGraph extends View {
             for (Bar p : points) {
                 Path path = new Path();
 
-                if(p.getStackedBar()){
+                if (p.getStackedBar()) {
                     ArrayList<BarStackSegment> values = new ArrayList<BarStackSegment>(p.getStackedValues());
                     float prevValue = 0;
-                    for(BarStackSegment value : values) {
+                    for (BarStackSegment value : values) {
                         value.Value += prevValue;
                         prevValue += value.Value;
                     }
                     Collections.reverse(values);
 
-                    for(BarStackSegment value : values) {
+                    for (BarStackSegment value : values) {
                         r.set((int) ((padding * 2) * count + padding + barWidth * count), (int) ((getHeight() - bottomPadding - (usableHeight * (value.Value / maxValue)))), (int) ((padding * 2) * count + padding + barWidth * (count + 1)), (int) ((getHeight() - bottomPadding)));
                         path.addRect(new RectF(r.left - selectPadding, r.top - selectPadding, r.right + selectPadding, r.bottom + selectPadding), Path.Direction.CW);
                         p.setPath(path);
                         p.setRegion(new Region(r.left - selectPadding, r.top - selectPadding, r.right + selectPadding, r.bottom + selectPadding));
+                        value.setPath(path);
+                        value.setRegion(new Region(r.left - selectPadding, r.top - selectPadding, r.right + selectPadding, r.bottom + selectPadding));
                         this.p.setColor(value.Color);
                         this.p.setAlpha(255);
                         canvas.drawRect(r, this.p);
                     }
-                }else {
+                } else {
                     r.set((int) ((padding * 2) * count + padding + barWidth * count), (int) (getHeight() - bottomPadding - (usableHeight * (p.getValue() / maxValue))), (int) ((padding * 2) * count + padding + barWidth * (count + 1)), (int) (getHeight() - bottomPadding));
                     path.addRect(new RectF(r.left - selectPadding, r.top - selectPadding, r.right + selectPadding, r.bottom + selectPadding), Path.Direction.CW);
                     p.setPath(path);
@@ -203,12 +214,24 @@ public class BarGraph extends View {
         if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_UP) {
             // find clicked bar index
             indexSelected = -1;
-            int count = 0;
-            for (int i = points.size() - 1; i >= 0; i--) {
+            for (int i = 0; i < points.size(); i++) {
                 Region r = new Region();
-                r.setPath(points.get(i).getPath(), points.get(i).getRegion());
-                if (r.contains(point.x, point.y)) {
-                    indexSelected = i;
+
+                if (points.get(i).getStackedBar()) {
+
+                    ArrayList<BarStackSegment> values = points.get(i).getStackedValues();
+                    for (BarStackSegment value : values) {
+                        r.setPath(value.getPath(), value.getRegion());
+                        if (r.contains(point.x, point.y)) {
+                            indexSelected = i;
+                        }
+                    }
+                }
+                else {
+                    r.setPath(points.get(i).getPath(), points.get(i).getRegion());
+                    if (r.contains(point.x, point.y)) {
+                        indexSelected = i;
+                    }
                 }
             }
         }
