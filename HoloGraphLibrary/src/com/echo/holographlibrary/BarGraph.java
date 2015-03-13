@@ -39,7 +39,6 @@ public class BarGraph extends View {
 
     private ArrayList<Bar> points = new ArrayList<Bar>();
     private Paint p = new Paint();
-    private Path path = new Path();
     private Rect r;
     private boolean showBarText = true;
     private int indexSelected = -1;
@@ -132,10 +131,9 @@ public class BarGraph extends View {
 
             r = new Rect();
 
-            path.reset();
-
             int count = 0;
             for (Bar p : points) {
+                Path path = new Path();
 
                 if(p.getStackedBar()){
                     ArrayList<BarStackSegment> values = new ArrayList<BarStackSegment>(p.getStackedValues());
