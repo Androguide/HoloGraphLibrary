@@ -10,9 +10,9 @@ This is a library written to allow beautiful graphs and charts to be easily inco
 * [BarGraph View](#bargraph-view)
 * [PieGraph View](#piegraph-view)
 
-## Usage
+# Usage
 
-#LineGraph View
+##LineGraph View
 
 ```xml
 
@@ -46,7 +46,7 @@ li.setLineToFill(0);
 ```
 ![LineGraph](https://lh3.googleusercontent.com/-Pr5nzXngxZo/US0_RKH9DGI/AAAAAAAAS1s/an4cS3Nr4qY/s844/13+-+1)
 
-#BarGraph View
+##BarGraph View
 
 ```xml
 
@@ -76,7 +76,7 @@ g.setUnit("$");
 ```
 ![BarGraph](https://lh3.googleusercontent.com/-9vy9Bvclx24/US0_RIZpl7I/AAAAAAAAS2o/k3Tpb2sIoFw/s844/13+-+3)
 
-#PieGraph View
+##PieGraph View
 
 ```xml
 
