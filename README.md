@@ -1,18 +1,14 @@
 HoloGraphLibrary
 ================
 
-Fork of the HoloGraphLibrary by Daniel Nadeau, with additionnal features
+Fork of the HoloGraphLibrary by Daniel Nadeau, with additional features
 
 # Welcome
 
 This is a library written to allow beautiful graphs and charts to be easily incorporated into your Android application. Included are: 
-* LineGraph view
-* BarGraph view
-* PieGraph view
-
-![LineGraph](https://lh3.googleusercontent.com/-Pr5nzXngxZo/US0_RKH9DGI/AAAAAAAAS1s/an4cS3Nr4qY/s844/13+-+1)
-![BarGraph](https://lh3.googleusercontent.com/-9vy9Bvclx24/US0_RIZpl7I/AAAAAAAAS2o/k3Tpb2sIoFw/s844/13+-+3)
-![PieGraph](https://lh6.googleusercontent.com/-Ad0lLdyK1cA/US0_RBYcqKI/AAAAAAAAS20/lQ8zLo_VSiQ/s844/13+-+5)
+* [LineGraph View](#LineGraph View)
+* [BarGraph View](#BarGraph View)
+* [PieGraph View](#PieGraph View)
 
 ## Usage
 
@@ -48,6 +44,7 @@ li.addLine(l);
 li.setRangeY(0, 10);
 li.setLineToFill(0);
 ```
+![LineGraph](https://lh3.googleusercontent.com/-Pr5nzXngxZo/US0_RKH9DGI/AAAAAAAAS1s/an4cS3Nr4qY/s844/13+-+1)
 
 #BarGraph View
 
@@ -77,6 +74,7 @@ BarGraph g = (BarGraph)findViewById(R.id.graph);
 g.setBars(points);
 g.setUnit("$");
 ```
+![BarGraph](https://lh3.googleusercontent.com/-9vy9Bvclx24/US0_RIZpl7I/AAAAAAAAS2o/k3Tpb2sIoFw/s844/13+-+3)
 
 #PieGraph View
 
@@ -105,5 +103,6 @@ slice.setValue(8);
 pg.addSlice(slice);
 ```
 
+![PieGraph](https://lh6.googleusercontent.com/-Ad0lLdyK1cA/US0_RBYcqKI/AAAAAAAAS20/lQ8zLo_VSiQ/s844/13+-+5)
 
 Have fun!
