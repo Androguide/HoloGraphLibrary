@@ -6,9 +6,9 @@ Fork of the HoloGraphLibrary by Daniel Nadeau, with additional features
 # Welcome
 
 This is a library written to allow beautiful graphs and charts to be easily incorporated into your Android application. Included are: 
-* [LineGraph View](#LineGraph View)
-* [BarGraph View](#BarGraph View)
-* [PieGraph View](#PieGraph View)
+* [LineGraph View](#linegraph-view)
+* [BarGraph View](#bargraph-view)
+* [PieGraph View](#piegraph-view)
 
 ## Usage
 
