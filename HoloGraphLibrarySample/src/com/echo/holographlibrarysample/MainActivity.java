@@ -50,6 +50,7 @@ public class MainActivity extends ActionBarActivity {
 		LineFragment lineFrag = new LineFragment();
         BarFragment barFrag = new BarFragment();
         PieFragment pieFrag = new PieFragment();
+        MultiSeriesDonutFragment multiSeriesDonutFrag = new MultiSeriesDonutFragment();
 		
         mTabsAdapter = new TabsAdapter(this, mViewPager);
         mTabsAdapter.addTab(bar.newTab().setText("Line"),
@@ -58,6 +59,8 @@ public class MainActivity extends ActionBarActivity {
                 BarFragment.class, null, barFrag);
         mTabsAdapter.addTab(bar.newTab().setText("Pie"),
                 PieFragment.class, null, pieFrag);
+        mTabsAdapter.addTab(bar.newTab().setText("Donut"),
+                MultiSeriesDonutFragment.class, null, multiSeriesDonutFrag);
         mViewPager.setOffscreenPageLimit(mTabsAdapter.getCount()-1);
 	}
 	
