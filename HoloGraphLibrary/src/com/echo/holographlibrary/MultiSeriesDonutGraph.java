@@ -47,7 +47,12 @@ public class MultiSeriesDonutGraph extends View
     private Path path = new Path();
 
     private Pair<Integer, Integer> indexSelected = Pair.create(-1, -1);
-    private int thickness = 200;
+    /**
+     * Either the thickness or the innerRadius can be specified. This determines which will be used to calculate the size of the hole in the middle of the chart.
+     */
+    private boolean useThickness = true;
+    private float thickness = 200;
+    private float innerRadius = 0;
     private OnSeriesSliceClickedListener listener;
 
 
@@ -87,7 +92,14 @@ public class MultiSeriesDonutGraph extends View
             chartRadius = midY;
         }
         chartRadius -= padding;
-        chartInnerRadius = chartRadius - thickness;
+        if (useThickness)
+        {
+            chartInnerRadius = chartRadius - thickness;
+        }
+        else
+        {
+            chartInnerRadius = innerRadius;
+        }
 
         float radialPadding = 2 * padding;
         float totalRadialPadding = (seriesList.size() - 1) * radialPadding;
@@ -165,23 +177,26 @@ public class MultiSeriesDonutGraph extends View
             int sliceCount = 0;
             for (MultiSeriesDonutSlice slice : series)
             {
-                Region r = new Region();
-                r.setPath(slice.getPath(), slice.getRegion());
-                if (r.contains(point.x, point.y) && event.getAction() == MotionEvent.ACTION_DOWN)
+                if (slice.isSelectable())
                 {
-                    indexSelected = Pair.create(seriesCount, sliceCount);
-                }
-                else if (event.getAction() == MotionEvent.ACTION_UP)
-                {
-                    if (r.contains(point.x, point.y) && listener != null)
+                    Region r = new Region();
+                    r.setPath(slice.getPath(), slice.getRegion());
+                    if (r.contains(point.x, point.y) && event.getAction() == MotionEvent.ACTION_DOWN)
                     {
-                        if (indexSelected.first > -1)
-                        {
-                            listener.onClick(indexSelected.first, indexSelected.second);
-                        }
-                        indexSelected = Pair.create(-1, -1);
+                        indexSelected = Pair.create(seriesCount, sliceCount);
                     }
+                    else if (event.getAction() == MotionEvent.ACTION_UP)
+                    {
+                        if (r.contains(point.x, point.y) && listener != null)
+                        {
+                            if (indexSelected.first > -1)
+                            {
+                                listener.onClick(indexSelected.first, indexSelected.second);
+                            }
+                            indexSelected = Pair.create(-1, -1);
+                        }
 
+                    }
                 }
                 sliceCount++;
             }
@@ -227,14 +242,17 @@ public class MultiSeriesDonutGraph extends View
         this.listener = listener;
     }
 
-    public int getThickness()
-    {
-        return thickness;
-    }
-
-    public void setThickness(int thickness)
+    public void setThickness(float thickness)
     {
         this.thickness = thickness;
+        useThickness = true;
+        postInvalidate();
+    }
+
+    public void setInnerRadius(float innerRadius)
+    {
+        this.innerRadius = innerRadius;
+        useThickness = false;
         postInvalidate();
     }
 
