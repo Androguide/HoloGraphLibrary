@@ -108,7 +108,15 @@ public class PieGraph extends View {
 				canvas.drawPath(path, paint);
 				paint.setAlpha(255);
 			}
-			
+
+			Bitmap icon = slice.getIcon();
+			if (icon != null) {
+				double rad = 2 * Math.PI * (currentAngle + currentSweep / 2) / 360.0;
+				double left = Math.cos(rad) * (innerRadius + radius) / 2;
+				double top = Math.sin(rad) * (innerRadius + radius) / 2;
+				canvas.drawBitmap(icon, midX - icon.getWidth() / 2 + (float)left, midY - icon.getHeight() / 2 + (float)top, null);
+			}
+
 			currentAngle = currentAngle+currentSweep;
 			
 			count++;
