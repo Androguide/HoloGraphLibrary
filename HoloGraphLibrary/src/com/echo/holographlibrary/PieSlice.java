@@ -23,6 +23,7 @@
 
 package com.echo.holographlibrary;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.Region;
@@ -34,6 +35,7 @@ public class PieSlice {
     private String title;
     private Path path;
     private Region region;
+    private Bitmap icon;
 
     public String getTitle() {
         return title;
@@ -73,6 +75,14 @@ public class PieSlice {
 
     public void setRegion(Region region) {
         this.region = region;
+    }
+
+    public Bitmap getIcon() {
+        return icon;
+    }
+
+    public void setIcon(Bitmap icon) {
+        this.icon = icon;
     }
 
 }
