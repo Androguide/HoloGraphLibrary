@@ -16,7 +16,7 @@ This is a library written to allow beautiful graphs and charts to be easily inco
 
 ## Usage
 
-#LineGraph View
+# LineGraph View
 
 ```xml
 
@@ -49,7 +49,7 @@ li.setRangeY(0, 10);
 li.setLineToFill(0);
 ```
 
-#BarGraph View
+# BarGraph View
 
 ```xml
 
@@ -78,7 +78,7 @@ g.setBars(points);
 g.setUnit("$");
 ```
 
-#PieGraph View
+# PieGraph View
 
 ```xml
 
