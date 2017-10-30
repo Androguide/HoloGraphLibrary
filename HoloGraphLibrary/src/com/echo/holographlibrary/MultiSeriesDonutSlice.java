@@ -34,6 +34,7 @@ public class MultiSeriesDonutSlice
     private String title;
     private Path path;
     private Region region;
+    private boolean selectable = true;
 
     public String getTitle() {
         return title;
@@ -73,5 +74,13 @@ public class MultiSeriesDonutSlice
 
     public void setRegion(Region region) {
         this.region = region;
+    }
+
+    public boolean isSelectable() {
+        return selectable;
+    }
+
+    public void setSelectable(boolean selectable) {
+        this.selectable = selectable;
     }
 }

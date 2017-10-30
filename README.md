@@ -9,10 +9,12 @@ This is a library written to allow beautiful graphs and charts to be easily inco
 * LineGraph view
 * BarGraph view
 * PieGraph view
+* MultiSeriesDonutGraph view
 
 ![LineGraph](https://lh3.googleusercontent.com/-Pr5nzXngxZo/US0_RKH9DGI/AAAAAAAAS1s/an4cS3Nr4qY/s844/13+-+1)
 ![BarGraph](https://lh3.googleusercontent.com/-9vy9Bvclx24/US0_RIZpl7I/AAAAAAAAS2o/k3Tpb2sIoFw/s844/13+-+3)
 ![PieGraph](https://lh6.googleusercontent.com/-Ad0lLdyK1cA/US0_RBYcqKI/AAAAAAAAS20/lQ8zLo_VSiQ/s844/13+-+5)
+![MultiSeriesDonutGraph](https://cloud.githubusercontent.com/assets/11535082/10306580/f81830b0-6c1f-11e5-9f47-2d52b38df2b0.png)
 
 ## Usage
 
@@ -103,6 +105,47 @@ slice = new PieSlice();
 slice.setColor(Color.parseColor("#AA66CC"));
 slice.setValue(8);
 pg.addSlice(slice);
+```
+
+#MultiSeriesDonutGraph View
+
+```xml
+
+<com.echo.holographlibrary.MultiSeriesDonutGraph
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/graph"/>
+```
+
+```java
+
+MultiSeriesDonutGraph mg = (MultiSeriesDonutGraph) v.findViewById(R.id.multiseriesdonutgraph);
+
+MultiSeriesDonutSlice slice = new MultiSeriesDonutSlice();
+slice.setColor(Color.parseColor("#99CC00"));
+slice.setValue(2);
+mg.addSlice(0, slice);
+slice = new MultiSeriesDonutSlice();
+slice.setColor(Color.parseColor("#FFBB33"));
+slice.setValue(3);
+mg.addSlice(0, slice);
+slice = new MultiSeriesDonutSlice();
+slice.setColor(Color.parseColor("#AA66CC"));
+slice.setValue(8);
+mg.addSlice(0, slice);
+
+slice = new MultiSeriesDonutSlice();
+slice.setColor(Color.parseColor("#99CC00"));
+slice.setValue(8);
+mg.addSlice(1, slice);
+slice = new MultiSeriesDonutSlice();
+slice.setColor(Color.parseColor("#FFBB33"));
+slice.setValue(5);
+mg.addSlice(1, slice);
+slice = new MultiSeriesDonutSlice();
+slice.setColor(Color.parseColor("#AA66CC"));
+slice.setValue(3);
+mg.addSlice(1, slice);
 ```
 
 
