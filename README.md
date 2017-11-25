@@ -1,5 +1,6 @@
 HoloGraphLibrary
 ================
+[![Badge](http://www.libtastic.com/static/osbadges/279.png)](http://www.libtastic.com/technology/279/)
 
 Fork of the HoloGraphLibrary by Daniel Nadeau, with additionnal features
 
